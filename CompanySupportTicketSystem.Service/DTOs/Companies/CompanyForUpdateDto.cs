@@ -1,8 +1,8 @@
-﻿using CompanySupportTicketSystem.Domain.Common;
+﻿using CompanySupportTicketSystem.Domain.Entities;
 
-namespace CompanySupportTicketSystem.Domain.Entities;
+namespace CompanySupportTicketSystem.Service.DTOs.Companies;
 
-public class Company : Auditable
+public class CompanyForUpdateDto
 {
     public string CompanyName { get; set; }
     public long CategoryId { get; set; }
@@ -13,6 +13,5 @@ public class Company : Auditable
     public string Email { get; set; }
     
     public bool IsActive { get; set; }
-   
     public decimal Rating { get; set; }
 }
