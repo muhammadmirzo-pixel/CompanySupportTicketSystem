@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CompanySupportTicketSystem.Domain.Common;
 
-namespace CompanySupportTicketSystem.Domain.Entities
+namespace CompanySupportTicketSystem.Domain.Entities;
+
+public class Order : Auditable
 {
-    internal class Order
-    {
-    }
+    public string Seat { get; set; }
+    public bool Paid { get; set; }
+    public long UserId { get; set; }
+    public long TicketId { get; set; }
 }
+

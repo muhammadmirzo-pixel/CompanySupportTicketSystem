@@ -1,11 +1,8 @@
-﻿using CompanySupportTicketSystem.Data.IRepositories;
+﻿using Newtonsoft.Json;
 using CompanySupportTicketSystem.Domain.Common;
 using CompanySupportTicketSystem.Domain.Entities;
+using CompanySupportTicketSystem.Data.IRepositories;
 using CompanySupportTicketSystem.Domain.Configurations;
-using Newtonsoft.Json;
-
-
-
 
 
 namespace CompanySupportTicketSystem.Data.Repositories;
