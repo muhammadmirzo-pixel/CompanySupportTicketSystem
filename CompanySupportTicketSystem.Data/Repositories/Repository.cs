@@ -30,6 +30,10 @@ public class Repository<TEntity> : IRepostiory<TEntity> where TEntity : Auditabl
             case nameof(User):
                 path = DatabasePath.USER_PATH;
                 break;
+            case nameof(Order):
+                path = DatabasePath.ORDER_PATH;
+                break;
+
             default:
                 throw new NotSupportedException($"Entity type {entityName} is not supported");
                 
@@ -65,7 +69,7 @@ public class Repository<TEntity> : IRepostiory<TEntity> where TEntity : Auditabl
         var entities = await this.RetrievAllAsync();
         entities.Add(entity);
         var str = JsonConvert.SerializeObject(entities,Formatting.Indented);
-        File.WriteAllTextAsync(str,path);
+        await File.WriteAllTextAsync(str,path);
         return true;
     }
 
