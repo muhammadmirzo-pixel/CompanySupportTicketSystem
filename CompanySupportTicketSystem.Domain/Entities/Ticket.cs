@@ -8,5 +8,6 @@ public class Ticket : Auditable
     public DateTime StartTime { get; set; }
     public decimal Price { get; set; }
     public long CompanyId { get; set; }
+    public string Seat {  get; set; }
     public long Count { get; set; }
 }
