@@ -1,6 +1,6 @@
 ﻿namespace CompanySupportTicketSystem.Data.IRepositories;
 
-public interface IRepostiory<TEntity>
+public interface IRepository<TEntity>
 {
     public Task<bool> InsertAsync(TEntity entity);
     public Task<bool> UpdateAsync(TEntity entity);

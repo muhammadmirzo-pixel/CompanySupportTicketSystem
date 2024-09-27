@@ -10,7 +10,7 @@ namespace CompanySupportTicketSystem.Service.Services;
 
 public class UserService : IUserService
 {
-    IRepostiory<User> userRespository = new Repository<User>();
+    IRepository<User> userRespository = new Repository<User>();
 
     public async Task<bool> AddAsync(User user)
     {
@@ -81,13 +81,13 @@ public class UserService : IUserService
             Password = userUpdate.Password,
             Address = userUpdate.Address,
             DateOfBirth = userUpdate.DateOfBirth,
-            CreatedDate = userUpdate.CreatedDate,
+            CreatedAt = userUpdate.CreatedAt,
             PaymentMethod = userUpdate.PaymentMethod,
-            UpdatedDate = userUpdate.UpdatedDate,
+            UpdatedAt = userUpdate.UpdatedAt,
 
         };
 
-        this.userRespository.UpdateAsync(mappedUser);
+        await this.userRespository.UpdateAsync(mappedUser);
         return true;
     }
 }

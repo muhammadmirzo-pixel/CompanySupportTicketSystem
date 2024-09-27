@@ -7,7 +7,7 @@ using CompanySupportTicketSystem.Domain.Configurations;
 
 namespace CompanySupportTicketSystem.Data.Repositories;
 
-public class Repository<TEntity> : IRepostiory<TEntity> where TEntity : Auditable
+public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditable
 {
     public List<TEntity> entities;
     public string path = "";
