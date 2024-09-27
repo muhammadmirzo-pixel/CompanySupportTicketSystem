@@ -9,7 +9,7 @@ namespace CompanySupportTicketSystem.Service.Services;
 
 public class TicketService : ITicketService
 {
-    IRepostiory<Ticket> ticketRepository = new Repository<Ticket>();
+    IRepository<Ticket> ticketRepository = new Repository<Ticket>();
     public async Task<bool> AddAsync(Ticket ticket)
     {
         var tickets = await this.ticketRepository.RetrievAllAsync();
@@ -83,7 +83,7 @@ public class TicketService : ITicketService
 
         };
 
-        this.ticketRepository.UpdateAsync(mappedTicket);
+        await this.ticketRepository.UpdateAsync(mappedTicket);
         return true;
     }
 }
