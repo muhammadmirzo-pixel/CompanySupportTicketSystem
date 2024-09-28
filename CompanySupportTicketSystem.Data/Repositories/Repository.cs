@@ -42,16 +42,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
     public async Task<bool> DeleteByIdAsync(long id)
     {
         List<TEntity> infos = new List<TEntity>();
-        bool isAvaible = false;
-        var entities = await this.RetrievAllAsync();
         await File.WriteAllTextAsync(path, "");
-
-        isAvaible = entities.Any(e => e.Id == id);
-        infos.AddRange(entities.Where(e => e.Id != id));
-
         var str = JsonConvert.SerializeObject(infos, Formatting.Indented);
         await File.AppendAllTextAsync(path, str);
-        return isAvaible;
+        return true;
     }
 
     public async Task<List<TEntity>> RetrievAllAsync()

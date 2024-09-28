@@ -23,9 +23,13 @@ public class UserService : IUserService
 
     public async Task<bool> DeleteByIdAsync(int id)
     {
-        var deleteResponse = await this.userRespository.DeleteByIdAsync(id);
-        if (deleteResponse)
+        var user = await GetByIdAsync(id);
+
+       if (user != null)
+        {
+            await this.userRespository.DeleteByIdAsync(id);
             return true;
+        }
         throw new TicketExceptions(404, "User not found");
     }
 

@@ -9,7 +9,7 @@ namespace CompanySupportTicketSystem.Service.Services;
 
 public class TicketService : ITicketService
 {
-    IRepostiory<Ticket> ticketRepository = new Repository<Ticket>();
+    IRepository<Ticket> ticketRepository = new Repository<Ticket>();
     public async Task<bool> AddAsync(Ticket ticket)
     {
         var tickets = await this.ticketRepository.RetrievAllAsync();
@@ -25,9 +25,12 @@ public class TicketService : ITicketService
 
     public async Task<bool> DeleteByIdAsync(long id)
     {
-        var deleteResponse = await this.ticketRepository.DeleteByIdAsync(id);
-        if (deleteResponse)
+        var ticket = await GetByIdAsync(id);
+        if (ticket != null)
+        {
+            await this.ticketRepository.DeleteByIdAsync(id);
             return true;
+        }
         throw new TicketExceptions(404, "Ticket not found");
     }
 
@@ -83,7 +86,7 @@ public class TicketService : ITicketService
 
         };
 
-        this.ticketRepository.UpdateAsync(mappedTicket);
+        await this.ticketRepository.UpdateAsync(mappedTicket);
         return true;
     }
 }

@@ -1,8 +1,12 @@
-﻿using CompanySupportTicketSystem.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CompanySupportTicketSystem.Service.DTOs.Companies;
 
-public class CompanyForUpdateDto
+public class CompanyForCreationDto
 {
     public string CompanyName { get; set; }
     public long CategoryId { get; set; }
