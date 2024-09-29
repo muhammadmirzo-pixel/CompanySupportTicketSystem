@@ -9,7 +9,7 @@ namespace CompanySupportTicketSystem.Service.Services;
 
 public class TicketService : ITicketService
 {
-    IRepostiory<Ticket> ticketRepository = new Repository<Ticket>();
+    IRepository<Ticket> ticketRepository = new Repository<Ticket>();
     public async Task<bool> AddAsync(Ticket ticket)
     {
         var tickets = await this.ticketRepository.RetrievAllAsync();
@@ -18,10 +18,6 @@ public class TicketService : ITicketService
         tickets.Add(ticket);
         return true;
     }
-
-    
-        
-    
 
     public async Task<bool> DeleteByIdAsync(long id)
     {
@@ -39,7 +35,6 @@ public class TicketService : ITicketService
 
         var mappedTickets = tickets.Select(t => new TicketForResultDto()
         {
-            CompanyId = t.CompanyId,
             Description = t.Description,
             Price = t.Price,
             StartTime = t.StartTime,
@@ -57,7 +52,6 @@ public class TicketService : ITicketService
 
         var mappedTicket = new TicketForResultDto()
         {
-            CompanyId = ticket.CompanyId,
             Description = ticket.Description,
             Price = ticket.Price,
             StartTime = ticket.StartTime,
@@ -75,7 +69,6 @@ public class TicketService : ITicketService
 
         var mappedTicket = new Ticket()
         {
-            CompanyId = ticketUpdate.CompanyId,
             Description = ticketUpdate.Description,
             Price = ticketUpdate.Price,
             StartTime = ticketUpdate.StartTime,
