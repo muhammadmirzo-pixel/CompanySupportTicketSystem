@@ -76,7 +76,7 @@ public class TicketService : ITicketService
 
         };
 
-        this.ticketRepository.UpdateAsync(mappedTicket);
+        await this.ticketRepository.UpdateAsync(mappedTicket);
         return true;
     }
 }

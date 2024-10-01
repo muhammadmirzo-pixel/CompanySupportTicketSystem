@@ -1,8 +1,8 @@
 ﻿using CompanySupportTicketSystem.Domain.Entities;
+using CompanySupportTicketSystem.Data.Repositories;
 using CompanySupportTicketSystem.Service.DTOs.Users;
 using CompanySupportTicketSystem.Service.Interfaces;
 using CompanySupportTicketSystem.Data.IRepositories;
-using CompanySupportTicketSystem.Data.Repositories;
 using CompanySupportTicketSystem.Service.Exceptions;
 
 
@@ -10,28 +10,30 @@ namespace CompanySupportTicketSystem.Service.Services;
 
 public class UserService : IUserService
 {
-    IRepository<User> userRespository = new Repository<User>();
+    IRepository<User> userRepository = new Repository<User>();
 
     public async Task<bool> AddAsync(User user)
     {
-        var users = await this.userRespository.RetrievAllAsync();
+        var users = await this.userRepository.RetrievAllAsync();
         if (users.Any(u => u.Email.Equals(user.Email, StringComparison.OrdinalIgnoreCase)))
             throw new TicketExceptions(409, "User already exists");
-        users.Add(user);
+        await userRepository.InsertAsync(user);
         return true;
     }
 
-    public async Task<bool> DeleteByIdAsync(int id)
+    public async Task<bool> DeleteByIdAsync(long id)
     {
-        var deleteResponse = await this.userRespository.DeleteByIdAsync(id);
-        if (deleteResponse)
-            return true;
-        throw new TicketExceptions(404, "User not found");
+        var deleteResponse = await this.userRepository.RetrievByIdAsync(id);
+        if (deleteResponse == null)
+            throw new TicketExceptions(404, "User not found");
+
+        await userRepository.DeleteByIdAsync(id);
+        return true;
     }
 
     public async Task<IEnumerable<UserForResultDto>> GetAllAsync()
     {
-        var users = await this.userRespository.RetrievAllAsync();
+        var users = await this.userRepository.RetrievAllAsync();
         if (!users.Any())
             throw new TicketExceptions(404, "Users not found");
 
@@ -47,9 +49,9 @@ public class UserService : IUserService
         return mappedUsers;
     }
 
-    public async Task<UserForResultDto> GetByIdAsync(int id)
+    public async Task<UserForResultDto> GetByIdAsync(long id)
     {
-        var user = await this.userRespository.RetrievByIdAsync(id);
+        var user = await this.userRepository.RetrievByIdAsync(id);
         if (user is null)
             throw new TicketExceptions(404, "User not found");
         var mappedUser = new UserForResultDto()
@@ -66,7 +68,7 @@ public class UserService : IUserService
 
     public async Task<bool> UpdateAsync(long id, UserForUpdateDto dto)
     {
-        var userUpdate = await this.userRespository.RetrievByIdAsync(id);
+        var userUpdate = await this.userRepository.RetrievByIdAsync(id);
         if (userUpdate is null)
             throw new TicketExceptions(404, "User not found");
 
@@ -82,12 +84,11 @@ public class UserService : IUserService
             Address = userUpdate.Address,
             DateOfBirth = userUpdate.DateOfBirth,
             CreatedAt = userUpdate.CreatedAt,
-            PaymentMethod = userUpdate.PaymentMethod,
             UpdatedAt = userUpdate.UpdatedAt,
 
         };
 
-        await this.userRespository.UpdateAsync(mappedUser);
+        await this.userRepository.UpdateAsync(mappedUser);
         return true;
     }
 }
