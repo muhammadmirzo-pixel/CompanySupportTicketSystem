@@ -76,9 +76,8 @@ public class OrderService : IOrderService
         var order = await orderRepository.RetrievByIdAsync(orderId);
 
         if (order == null)
-        {
             throw new TicketExceptions(404, $"Order with ID {orderId} not found.");
-        }
+        
 
         await orderRepository.DeleteByIdAsync(orderId);
         return true;
