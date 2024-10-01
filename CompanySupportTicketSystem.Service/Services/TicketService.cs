@@ -19,10 +19,6 @@ public class TicketService : ITicketService
         return true;
     }
 
-    
-        
-    
-
     public async Task<bool> DeleteByIdAsync(long id)
     {
         var deleteResponse = await this.ticketRepository.DeleteByIdAsync(id);
@@ -39,7 +35,6 @@ public class TicketService : ITicketService
 
         var mappedTickets = tickets.Select(t => new TicketForResultDto()
         {
-            CompanyId = t.CompanyId,
             Description = t.Description,
             Price = t.Price,
             StartTime = t.StartTime,
@@ -57,7 +52,6 @@ public class TicketService : ITicketService
 
         var mappedTicket = new TicketForResultDto()
         {
-            CompanyId = ticket.CompanyId,
             Description = ticket.Description,
             Price = ticket.Price,
             StartTime = ticket.StartTime,
@@ -75,7 +69,6 @@ public class TicketService : ITicketService
 
         var mappedTicket = new Ticket()
         {
-            CompanyId = ticketUpdate.CompanyId,
             Description = ticketUpdate.Description,
             Price = ticketUpdate.Price,
             StartTime = ticketUpdate.StartTime,
