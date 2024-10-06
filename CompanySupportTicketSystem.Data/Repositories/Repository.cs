@@ -22,7 +22,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
                 path = DatabasePath.COMPANY_PATH;
                 break;
             case nameof(CompanyCategory):
-                path = DatabasePath.COMPANY_PATH;
+                path = DatabasePath.COMPANY_CATEGORY;
                 break;
             case nameof(Ticket):
                 path = DatabasePath.TICKET_PATH;
@@ -30,7 +30,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
             case nameof(User):
                 path = DatabasePath.USER_PATH;
                 break;
-            case nameof(Order):
+            case nameof(OrderForCreationDto):
                 path = DatabasePath.ORDER_PATH;
                 break;
 
@@ -69,7 +69,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
         var entities = await this.RetrievAllAsync();
         entities.Add(entity);
         var str = JsonConvert.SerializeObject(entities,Formatting.Indented);
-        await File.WriteAllTextAsync(str,path);
+        await File.WriteAllTextAsync(path, str);
         return true;
     }
 

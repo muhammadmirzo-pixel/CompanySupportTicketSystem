@@ -1,1 +1,15 @@
-﻿
+[
+  {
+    "FirstName": "salom",
+    "LastName": "salomov",
+    "Email": "salom@gmail.com",
+    "Password": "1234325asdfkjhs",
+    "PhoneNumber": "1234567890",
+    "DateOfBirth": "0001-01-01T00:00:00",
+    "Address": "asdjfhkjsdgf",
+    "Gender": "A",
+    "Id": 1,
+    "CreatedAt": "0001-01-01T00:00:00",
+    "UpdatedAt": null
+  }
+]

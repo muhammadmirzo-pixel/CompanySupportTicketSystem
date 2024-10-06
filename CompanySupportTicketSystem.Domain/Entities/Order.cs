@@ -3,7 +3,7 @@ using CompanySupportTicketSystem.Domain.Common;
 
 namespace CompanySupportTicketSystem.Domain.Entities;
 
-public class Order : Auditable
+public class OrderForCreationDto : Auditable
 {
     public string Seat { get; set; }
     public bool Paid { get; set; }
