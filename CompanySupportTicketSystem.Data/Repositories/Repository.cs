@@ -30,7 +30,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
             case nameof(User):
                 path = DatabasePath.USER_PATH;
                 break;
-            case nameof(OrderForCreationDto):
+            case nameof(Order):
                 path = DatabasePath.ORDER_PATH;
                 break;
 
