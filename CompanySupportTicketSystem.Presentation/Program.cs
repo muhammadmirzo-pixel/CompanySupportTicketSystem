@@ -1,8 +1,7 @@
-﻿using CompanySupportTicketSystem.Data.IRepositories;
-using CompanySupportTicketSystem.Data.Repositories;
-using CompanySupportTicketSystem.Domain.Entities;
-using CompanySupportTicketSystem.Service.Interfaces;
+﻿using CompanySupportTicketSystem.Domain.Entities;
 using CompanySupportTicketSystem.Service.Services;
+using CompanySupportTicketSystem.Service.Interfaces;
+using CompanySupportTicketSystem.Service.DTOs.Orders;
 
 namespace CompanySupportTicketSystem.Presentation;
 
@@ -13,7 +12,7 @@ class Program
     {
         IOrderService orderService = new OrderService();
 
-        var order = new CompanySupportTicketSystem.Service.DTOs.Orders.OrderForCreationDto
+        var order = new OrderForCreationDto()
         {
             Seat = "45",
             TicketId = 1,

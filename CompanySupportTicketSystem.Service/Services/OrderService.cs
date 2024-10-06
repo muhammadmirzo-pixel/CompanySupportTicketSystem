@@ -9,7 +9,7 @@ using CompanySupportTicketSystem.Service.DTOs.Orders;
 namespace CompanySupportTicketSystem.Service.Services;
 public class OrderService : IOrderService
 {
-    private readonly IRepository<Domain.Entities.OrderForCreationDto> orderRepository = new Repository<Domain.Entities.OrderForCreationDto>();
+    private readonly IRepository<Order> orderRepository = new Repository<Order>();
 
     public async Task<bool> AddAsync(DTOs.Orders.OrderForCreationDto dto)
     {
@@ -19,7 +19,7 @@ public class OrderService : IOrderService
         if (order is not null)
             throw new TicketExceptions(409, "User already exist");
 
-        var orderMapping = new Domain.Entities.OrderForCreationDto()
+        var orderMapping = new Order()
         {
             Seat = dto.Seat,
             UserId = dto.UserId,
@@ -37,7 +37,7 @@ public class OrderService : IOrderService
         if (order == null)
                 throw new TicketExceptions(404, "seat not found");
 
-        var orderMapping = new Domain.Entities.OrderForCreationDto()
+        var orderMapping = new Order()
         {
             Id = order.Id,
             Seat = orderUpd.Seat,
