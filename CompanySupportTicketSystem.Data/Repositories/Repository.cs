@@ -22,7 +22,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
                 path = DatabasePath.COMPANY_PATH;
                 break;
             case nameof(CompanyCategory):
-                path = DatabasePath.COMPANY_PATH;
+                path = DatabasePath.COMPANY_CATEGORY;
                 break;
             case nameof(Ticket):
                 path = DatabasePath.TICKET_PATH;

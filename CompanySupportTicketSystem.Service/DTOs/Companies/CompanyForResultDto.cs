@@ -4,7 +4,7 @@ namespace CompanySupportTicketSystem.Service.DTOs.Companies;
 
 public class CompanyForResultDto
 {
-    public long Id { get; set; };
+    public long Id { get; set; }
     public CompanyCategoryForResultDto Category { get; set; }
     public string CompanyName { get; set; }
     public string Description { get; set; }

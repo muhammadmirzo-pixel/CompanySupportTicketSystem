@@ -22,6 +22,7 @@ public class CompanyService : ICompanyService
         var companies = await this.companyRepository.RetrievAllAsync();
         if (companies.Any(t => t.CompanyName == company.CompanyName))
             throw new TicketExceptions(409, "Company already exists");
+
         var mappedCompany  = new Company()
         {
             CompanyName = company.CompanyName,
@@ -89,6 +90,7 @@ public class CompanyService : ICompanyService
 
         var mappedCompany = new CompanyForResultDto()
         {
+            Id = id ,
             CompanyName = company.CompanyName,
             Rating = company.Rating,
             PhoneNumber = company.PhoneNumber,

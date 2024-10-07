@@ -24,12 +24,12 @@ public class CompanyCategoryService : ICompanyCategoryService
         var mappedCategory = new CompanyCategory()
         {
             CategoryName = category.CategoryName,
-            CategoryId = category.CategoryId,
+            Id = category.Id,
             CreatedAt = DateTime.Now,
             Description = category.Description,
             IsActive = category.IsActive,
         };
-        categories.Add(mappedCategory);
+        await companyCategoryRepository.InsertAsync(mappedCategory);
         return true;
     }
 
@@ -57,6 +57,7 @@ public class CompanyCategoryService : ICompanyCategoryService
 
         var mappedTickets = categories.Select(t => new CompanyCategoryForResultDto()
         {
+            Id = t.Id,
             CategoryName = t.CategoryName,
             Description = t.Description,
             IsActive = t.IsActive,
@@ -73,6 +74,7 @@ public class CompanyCategoryService : ICompanyCategoryService
 
         var mappedTicket = new CompanyCategoryForResultDto()
         {
+            Id = id,  
             CategoryName = category.CategoryName,
             IsActive    = category.IsActive,
             Description = category.Description,
@@ -92,10 +94,9 @@ public class CompanyCategoryService : ICompanyCategoryService
             CategoryName = category.CategoryName,
             IsActive = category.IsActive,
             Description = category.Description,
-            CategoryId = category.CategoryId,
+            Id = category.Id,
             CreatedAt = categoryUpdate.CreatedAt,
             UpdatedAt = DateTime.UtcNow,
-            Id = categoryUpdate.Id
         };
 
         await this.companyCategoryRepository.UpdateAsync(mappedCategory);
