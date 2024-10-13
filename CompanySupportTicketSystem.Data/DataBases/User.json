@@ -11,5 +11,31 @@
     "Id": 1,
     "CreatedAt": "0001-01-01T00:00:00",
     "UpdatedAt": null
+  },
+  {
+    "FirstName": "1",
+    "LastName": "1",
+    "Email": "",
+    "Password": "1",
+    "PhoneNumber": "1",
+    "DateOfBirth": "1010-10-10T00:00:00",
+    "Address": "102",
+    "Gender": "man",
+    "Id": 2,
+    "CreatedAt": "0001-01-01T00:00:00",
+    "UpdatedAt": null
+  },
+  {
+    "FirstName": "sam",
+    "LastName": "sam",
+    "Email": "asgdjadsklf",
+    "Password": "sam",
+    "PhoneNumber": "123455",
+    "DateOfBirth": "1122-11-11T00:00:00",
+    "Address": "sam village",
+    "Gender": "man",
+    "Id": 4,
+    "CreatedAt": "0001-01-01T00:00:00",
+    "UpdatedAt": null
   }
 ]

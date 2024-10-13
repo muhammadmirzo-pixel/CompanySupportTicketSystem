@@ -1,4 +1,5 @@
-﻿using CompanySupportTicketSystem.Domain.Entities;
+﻿using static System.Console;
+using CompanySupportTicketSystem.Domain.Entities;
 using CompanySupportTicketSystem.Data.Repositories;
 using CompanySupportTicketSystem.Service.DTOs.Users;
 using CompanySupportTicketSystem.Service.Interfaces;
@@ -17,7 +18,10 @@ public class UserService : IUserService
         var users = await this.userRepository.RetrievAllAsync();
         if (users.Any(u => u.Email.Equals(user.Email, StringComparison.OrdinalIgnoreCase)))
             throw new TicketExceptions(409, "User already exists");
-        await userRepository.InsertAsync(user);
+        else
+            await Out.WriteLineAsync("User successfully added");
+        await this.userRepository.InsertAsync(user);
+
         return true;
     }
 
