@@ -5,10 +5,10 @@ namespace CompanySupportTicketSystem.Service.Interfaces;
 
 public interface ICompanyCategoryService
 {
-    public Task<bool> AddAsync(CompanyCategory category);
+    public Task<bool> AddAsync(CompanyCategoryForCreationDto category);
     public Task<bool> DeleteByIdAsync(long id);
-    public Task<bool> UpdateAsync(CompanyCategory category);
+    public Task<bool> UpdateAsync(long id, CompanyCategoryForUpdateDto category);
     public Task<CompanyCategoryForResultDto> GetByIdAsync(long id);
-    public Task<CompanyCategoryForResultDto> GetAllAsync();
+    public Task<IEnumerable<CompanyCategoryForResultDto>> GetAllAsync();
 
 }
