@@ -5,9 +5,9 @@ namespace CompanySupportTicketSystem.Service.Interfaces;
 
 public interface IUserService
 {
-    public Task<bool> AddAsync(User user);
+    public Task<bool> AddAsync(UserForCreationDto dto);
     public Task<bool> UpdateAsync(long id,UserForUpdateDto dto);
-    public Task<bool> DeleteByIdAsync(int id);
-    public Task<UserForResultDto> GetByIdAsync(int id);
+    public Task<bool> DeleteByIdAsync(long id);
+    public Task<UserForResultDto> GetByIdAsync(long id);
     public Task<IEnumerable<UserForResultDto>> GetAllAsync();
 }

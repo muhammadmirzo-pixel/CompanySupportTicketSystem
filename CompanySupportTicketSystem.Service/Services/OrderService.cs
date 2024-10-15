@@ -11,7 +11,7 @@ public class OrderService : IOrderService
 {
     private readonly IRepository<Order> orderRepository = new Repository<Order>();
 
-    public async Task<bool> AddAsync(OrderForCreationDto dto)
+    public async Task<bool> AddAsync(DTOs.Orders.OrderForCreationDto dto)
     {
         var orders = await this.orderRepository.RetrievAllAsync();
 
@@ -76,9 +76,8 @@ public class OrderService : IOrderService
         var order = await orderRepository.RetrievByIdAsync(orderId);
 
         if (order == null)
-        {
             throw new TicketExceptions(404, $"Order with ID {orderId} not found.");
-        }
+        
 
         await orderRepository.DeleteByIdAsync(orderId);
         return true;

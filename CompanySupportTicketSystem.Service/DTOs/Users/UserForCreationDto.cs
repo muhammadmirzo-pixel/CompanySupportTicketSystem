@@ -11,5 +11,4 @@ public class UserForCreationDto
     public string Address { get; set; }
     public string PaymentMethod { get; set; }
     public string Gender { get; set; }
-
 }

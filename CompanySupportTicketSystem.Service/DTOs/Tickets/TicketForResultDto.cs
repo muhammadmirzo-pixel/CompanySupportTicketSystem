@@ -11,5 +11,4 @@ public class TicketForResultDto
     public decimal Price { get; set; }
     public CompanyForResultDto Company { get; set; }
     public long Count { get; set; }
-
 }

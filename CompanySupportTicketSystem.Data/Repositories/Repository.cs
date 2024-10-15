@@ -41,6 +41,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
     }
     public async Task<bool> DeleteByIdAsync(long id)
     {
+
         List<TEntity> infos = new List<TEntity>();
         await File.WriteAllTextAsync(path, "");
         var str = JsonConvert.SerializeObject(infos, Formatting.Indented);
@@ -59,11 +60,11 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
 
     public async Task<bool> InsertAsync(TEntity entity)
     {
+        var entities =  RetrievAllAsync().Result.ToList();
         entity.Id = await GenerateIdAsync();
-        var entities = await this.RetrievAllAsync();
+        entity.CreatedAt = DateTime.Now;
         entities.Add(entity);
-        var str = JsonConvert.SerializeObject(entities,Formatting.Indented);
-        await File.WriteAllTextAsync(str,path);
+        await WriteToFileAsync(entities);
         return true;
     }
 
@@ -75,15 +76,14 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
 
     public async Task<bool> UpdateAsync(TEntity entity)
     {
-        bool IsAvailable = false;
         var entities = await this.RetrievAllAsync();
-        await File.WriteAllTextAsync(path, "[]");
-        await this.DeleteByIdAsync(entity.Id);
-        entities.Add(entity);
+        var models = entities.
+            Where(e => e.Id != entity.Id).ToList();
 
-        var str = JsonConvert.SerializeObject(entities, Formatting.Indented);
-        await File.WriteAllTextAsync(path, str);
-        return IsAvailable;
+        models.Add(entity);
+        models.OrderBy(m => m.Id);
+        await WriteToFileAsync(models);
+        return true;
     }
     private async Task<long> GenerateIdAsync()
     {
@@ -92,5 +92,10 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : Auditabl
             return 1;
         var lastId = items.Max(x => x.Id);
         return ++lastId;    
+    }
+    private async Task WriteToFileAsync(IEnumerable<TEntity> entities)
+    {
+        var str = JsonConvert.SerializeObject(entities, Formatting.Indented);
+        await File.WriteAllTextAsync(path, str);
     }
 }

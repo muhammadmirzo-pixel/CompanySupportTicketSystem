@@ -1,4 +1,4 @@
-﻿using CompanySupportTicketSystem.Data.IRepositories;
+using CompanySupportTicketSystem.Data.IRepositories;
 using CompanySupportTicketSystem.Data.Repositories;
 using CompanySupportTicketSystem.Domain.Entities;
 using CompanySupportTicketSystem.Service.DTOs.Tickets;
@@ -11,9 +11,9 @@ public class TicketService : ITicketService
 {
     ICompanyService companyService  = new CompanyService();
     IRepository<Ticket> ticketRepository = new Repository<Ticket>();
+
     public async Task<bool> AddAsync(TicketForCreationDto ticket)
     {
-
         var tickets = await this.ticketRepository.RetrievAllAsync();
         if(tickets.Any(t => t.Description == ticket.Description && t.CompanyId == ticket.CompanyId))
             throw new TicketExceptions(409, "Ticket already exists");
@@ -32,10 +32,6 @@ public class TicketService : ITicketService
         return true;
     }
 
-    
-        
-    
-
     public async Task<bool> DeleteByIdAsync(long id)
     {
         var ticket = await GetByIdAsync(id);
@@ -48,8 +44,7 @@ public class TicketService : ITicketService
     }
 
     public async Task<IEnumerable<TicketForResultDto>> GetAllAsync()
-    {
-        
+    {       
         var tickets = await this.ticketRepository.RetrievAllAsync();
         
         if (!tickets.Any())
@@ -66,8 +61,7 @@ public class TicketService : ITicketService
                 Price = ticket.Price,
                 StartTime = ticket.StartTime,
                 Seat = ticket.Seat,
-                Count = ticket.Count
-                
+                Count = ticket.Count            
             };
             mappedTickets.Add(mappedTicket);
         }
@@ -89,9 +83,8 @@ public class TicketService : ITicketService
                 StartTime =i.StartTime
             });
         return await Task.WhenAll(tickets);
-        
-
     }
+
 
     public async Task<TicketForResultDto> GetByIdAsync(long id)
     {
