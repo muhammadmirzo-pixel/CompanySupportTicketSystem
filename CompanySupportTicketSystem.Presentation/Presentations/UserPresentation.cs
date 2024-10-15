@@ -3,6 +3,7 @@ using CompanySupportTicketSystem.Domain.Entities;
 using CompanySupportTicketSystem.Service.DTOs.Users;
 using CompanySupportTicketSystem.Service.Services;
 using CompanySupportTicketSystem.Service.Exceptions;
+using System.Diagnostics;
 namespace CompanySupportTicketSystem.Presentation.Presentations;
 
 public class UserPresentation
@@ -21,6 +22,7 @@ public class UserPresentation
                 await Out.WriteLineAsync("4. Get by Id");
                 await Out.WriteLineAsync("5. Get all");
                 await Out.WriteLineAsync("6. Close");
+                await Out.WriteAsync("=> ");
 
                 int number = int.Parse(ReadLine());
                 User user = new User();
@@ -28,36 +30,61 @@ public class UserPresentation
                 {
                     case 1:
                         Clear();
-                        await Out.WriteAsync("Enter the FirstName: ");
-                        user.FirstName = ReadLine();
+                        await Out.WriteLineAsync("1. I can do it myself");
+                        await Out.WriteLineAsync("2. Registration instructions");
+                        Write("=> ");
 
-                        await Out.WriteAsync("Enter the LastName: ");
-                        user.LastName = ReadLine();
+                        int choice = int.Parse(ReadLine());
+                        if (choice == 1)
+                        {
+                            Clear();
+                            await Out.WriteAsync("Enter the FirstName: ");
+                            user.FirstName = ReadLine();
 
-                        await Out.WriteAsync("Enter the Email ");
-                        user.Email = ReadLine();
+                            await Out.WriteAsync("Enter the LastName: ");
+                            user.LastName = ReadLine();
 
-                        await Out.WriteAsync("Enter the Password: ");
-                        user.Password = ReadLine();
+                            await Out.WriteAsync("Enter the Email: ");
+                            user.Email = ReadLine();
 
-                        await Out.WriteAsync("Enter the Phone number: ");
-                        user.PhoneNumber = ReadLine();
+                            await Out.WriteAsync("Enter the Password: ");
+                            user.Password = ReadLine();
 
-                        await Out.WriteAsync("Please enter your date of birth (dd-MM-yyyy): ");
-                        user.DateOfBirth = DateTime.ParseExact(Console.ReadLine(), "dd-MM-yyyy", null);
+                            await Out.WriteAsync("Enter the Phone number: ");
+                            user.PhoneNumber = ReadLine();
 
-                        await Out.WriteAsync("Enter the Address: ");
-                        user.Address = ReadLine();
+                            await Out.WriteAsync("Please enter your date of birth (dd-MM-yyyy): ");
+                            user.DateOfBirth = DateTime.ParseExact(ReadLine(), "dd-MM-yyyy", null);
 
-                        await Out.WriteAsync("Enter the Gender(man/woman): ");
-                        user.Gender = ReadLine();
-                        if (user.Gender == "man")
-                            await Out.WriteLineAsync();
-                        else if (user.Gender == "woman")
-                            await Out.WriteLineAsync();
-                        else
-                            await Out.WriteLineAsync("We only serve individuals who identify as male or female!");
-                    break;
+                            await Out.WriteAsync("Enter the Address: ");
+                            user.Address = ReadLine();
+
+                            await Out.WriteAsync("Enter the Gender (man/woman): ");
+                            user.Gender = ReadLine();
+                            if (user.Gender == "man" || user.Gender == "woman")
+                            {
+                                await Out.WriteLineAsync("");
+                            }
+                            else
+                            {
+                                await Out.WriteLineAsync("We only serve individuals who identify as male or female!");
+                            }
+
+                            await userService.AddAsync(user);
+
+                            await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                            ReadKey();
+                            Clear();
+                        }
+                        else if (choice == 2)
+                        {
+                            OpenYouTubeRegistrationInstructions();
+                            await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                            ReadKey();
+                            Clear();
+                        }
+                        break;
+
 
 
 
@@ -69,7 +96,11 @@ public class UserPresentation
                         var deleteUser = await userService.DeleteByIdAsync(userId);
                         if (deleteUser)
                             await Out.WriteLineAsync("User successfully deleted");
-                    break;
+
+                        await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                        ReadKey();
+                        Clear();
+                        break;
 
 
 
@@ -98,13 +129,17 @@ public class UserPresentation
 
                         Write("Enter the Gender(man/woman): ");
                         userUpd.Gender = ReadLine();
-                        if (userUpd.Gender == "man")
-                            await Out.WriteLineAsync();
+                        if (userUpd.Gender == "man\n")
+                            await Out.WriteLineAsync("let's go man");
                         else if (userUpd.Gender == "woman")
-                            await Out.WriteLineAsync();
+                            await Out.WriteLineAsync("ok!\n");
                         else
-                            await Out.WriteLineAsync("We only serve individuals who identify as male or female!");
-                    break;
+                            await Out.WriteLineAsync("We only serve individuals who identify as male or female!\n");
+
+                        await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                        ReadKey();
+                        Clear();
+                        break;
 
 
 
@@ -119,7 +154,10 @@ public class UserPresentation
                             $"\nEmail: {userInfo.Email}" +
                             $"\nPhone number: {userInfo.PhoneNumber}" +
                             $"\nDate of birth: {userInfo.Gender}");
-                    break;
+                        await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                        ReadKey();
+                        Clear();
+                        break;
 
 
 
@@ -131,8 +169,12 @@ public class UserPresentation
                                 $"\nLastname: {userInformation.LastName}" +
                                 $"\nEmail: {userInformation.Email}" +
                                 $"\nPhone number: {userInformation.PhoneNumber}" +
-                                $"\nGender: {userInformation.Gender}");
-                    break;
+                                $"\nGender: {userInformation.Gender}\n\n");
+                       
+                        await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                        ReadKey();
+                        Clear();
+                        break;
 
 
 
@@ -140,7 +182,11 @@ public class UserPresentation
                         Console.Clear();
                         await Out.WriteLineAsync("Thank you :)");
                         check = false;
-                    break;
+
+                        await Out.WriteLineAsync("\n\n\n\nPress the <<Space>> key to clear the screen!");
+                        ReadKey();
+                        Clear();
+                        break;
                 }
             }
             catch (TicketExceptions ex)
@@ -155,6 +201,25 @@ public class UserPresentation
             {
                 await Out.WriteLineAsync() ;
             }
+        }
+    }
+
+
+    static void OpenYouTubeRegistrationInstructions()
+    {
+        string query = "registration tutorial";
+        string url = $"https://youtu.be/ASysdMyxFUQ?si=BfwKtGfB2Ad9LzCk{Uri.EscapeDataString(query)}";
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Could not open the URL. Error: {ex.Message}");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CompanySupportTicketSystem.Domain.Entities;
+﻿using static System.Console;
+using CompanySupportTicketSystem.Domain.Entities;
 using CompanySupportTicketSystem.Data.Repositories;
 using CompanySupportTicketSystem.Service.DTOs.Users;
 using CompanySupportTicketSystem.Service.Interfaces;
@@ -33,7 +34,6 @@ public class UserService : IUserService
         };
 
         return await this.userRepository.InsertAsync(mappedUser);
-        
     }
 
     public async Task<bool> DeleteByIdAsync(long id)
