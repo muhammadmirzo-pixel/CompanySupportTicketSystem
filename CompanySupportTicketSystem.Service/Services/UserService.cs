@@ -30,9 +30,7 @@ public class UserService : IUserService
             DateOfBirth = dto.DateOfBirth,
             Gender = dto.Gender,
             PhoneNumber = dto.PhoneNumber,
-
         };
-
         return await this.userRepository.InsertAsync(mappedUser);
     }
 
@@ -80,7 +78,6 @@ public class UserService : IUserService
             Email = user.Email,
             Gender = user.Gender,
             PhoneNumber = user.PhoneNumber,
-
         };
         return mappedUser;
     }
@@ -100,9 +97,7 @@ public class UserService : IUserService
             PhoneNumber = user.PhoneNumber,
             Address = user.Address,
             DateOfBirth = user.DateOfBirth,
-
         };
-
         var updatedUser = await this.userRepository.UpdateAsync(mappedUser);
         return updatedUser;
     }

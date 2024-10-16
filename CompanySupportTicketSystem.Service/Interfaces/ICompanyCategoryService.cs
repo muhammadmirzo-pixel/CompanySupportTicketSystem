@@ -12,3 +12,4 @@ public interface ICompanyCategoryService
     public Task<IEnumerable<CompanyCategoryForResultDto>> GetAllAsync();
 
 }
+    
